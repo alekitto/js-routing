@@ -5,7 +5,7 @@ namespace Kcs\JsRouting\Routing;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 
-class RouteExtractor
+class RouteExtractor implements RouteExtractorInterface
 {
     /**
      * @var RouteCollection
