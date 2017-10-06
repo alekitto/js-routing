@@ -1,3 +1,5 @@
+const InvalidArgumentException = require('./InvalidArgumentException');
+
 /**
  * Exception thrown when a route does not exist.
  */

@@ -11,10 +11,5 @@
       },
     ]
   ],
-  "env": {
-    "production": {
-      "presets": ["minify"]
-    }
-  },
   "ignore": []
 }

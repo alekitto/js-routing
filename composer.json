@@ -1,6 +1,13 @@
 {
     "name": "kcs/js-routing",
     "description": "Symfony's UrlGenerator for javascript with routes extractor and dumper",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alessandro Chitolina",
+            "email": "alekitto@gmail.com"
+        }
+    ],
     "type": "library",
     "require": {
         "symfony/routing": "^2.7|^3.0"
@@ -12,12 +19,10 @@
     "conflict": {
         "twig/twig": "<1.34"
     },
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Alessandro Chitolina",
-            "email": "alekitto@gmail.com"
+    "autoload": {
+        "psr-4": {
+            "Kcs\\JsRouting\\": "src/"
         }
-    ],
+    },
     "minimum-stability": "stable"
 }

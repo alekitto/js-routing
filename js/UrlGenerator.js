@@ -1,5 +1,3 @@
-require('@jymfony/exceptions/lib/Exception');
-require('@jymfony/exceptions/lib/InvalidArgumentException');
 require('@jymfony/util/lib/Object/entries');
 require('@jymfony/util/lib/String/strtr');
 
@@ -22,7 +20,7 @@ const decodedChars = {
 
 class UrlGenerator {
     constructor(routeCollection) {
-        this._routeCollection = routeCollection;
+        this._routeCollection = Object.assign({}, routeCollection);
 
         const scheme = location.protocol.replace(/:$/, '').toLowerCase();
         const isSecure = scheme === 'https';
@@ -35,6 +33,17 @@ class UrlGenerator {
             httpsPort: isSecure ? ~~(location.port || 443) : 443,
             queryString: location.search.replace(/^\?/, ''),
         };
+    }
+
+    /**
+     * Add routes to router collection.
+     *
+     * @param {Object<string, Object>} routeCollection
+     */
+    addRoutes(routeCollection) {
+        for (const [ name, route ] of Object.entries(routeCollection)) {
+            this._routeCollection[name] = route;
+        }
     }
 
     /**

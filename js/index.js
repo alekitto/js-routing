@@ -1,0 +1,1 @@
+global.UrlGenerator = require('./UrlGenerator');
