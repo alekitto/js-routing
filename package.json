@@ -2,7 +2,8 @@
   "author": "Alessandro Chitolina <alekitto@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@jymfony/util": "0.1.0-alpha.8"
+    "@jymfony/util": "0.1.0-alpha.8",
+    "regenerator-runtime": "^0.11.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
