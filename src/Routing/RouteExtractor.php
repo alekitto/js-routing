@@ -41,6 +41,7 @@ class RouteExtractor implements RouteExtractorInterface
                 'defaults' => $defaults,
                 'tokens' => $compiledRoute->getTokens(),
                 'schemes' => $route->getSchemes(),
+                'hostTokens' => $compiledRoute->getHostTokens(),
             ];
         }
 
