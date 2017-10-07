@@ -1,3 +1,4 @@
+require('@jymfony/util/lib/is');
 require('@jymfony/util/lib/Object/entries');
 require('@jymfony/util/lib/String/strtr');
 
