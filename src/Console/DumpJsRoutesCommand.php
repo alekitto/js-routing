@@ -68,7 +68,7 @@ class DumpJsRoutesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sections = $input->getOption('section');
-        $this->io->text('Dumping routes for <success>' . ($sections ? '"' . implode(', ', $sections) . '"' : 'all') . '</success> sections...');
+        $this->io->text('Dumping routes for <info>' . ($sections ? '"' . implode(', ', $sections) . '"' : 'all') . '</info> sections...');
 
         $routes = $this->extractor->extract($sections ?: null);
 
