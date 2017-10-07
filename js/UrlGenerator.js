@@ -143,7 +143,7 @@ class UrlGenerator {
             url = '/';
         }
 
-        url = strtr(
+        url = __jymfony.strtr(
             encodeURIComponent(url)
                 .replace(/'/g, '%27')
                 .replace(/\(/g, '%28')
@@ -154,7 +154,7 @@ class UrlGenerator {
         // the path segments "." and ".." are interpreted as relative reference when resolving a URI; see http://tools.ietf.org/html/rfc3986#section-3.3
         // so we need to encode them as they are not used for this purpose here
         // otherwise we would generate a URI that, when followed by a user agent (e.g. browser), does not match this route
-        url = strtr(url, {'/../': '/%2E%2E/', '/./': '/%2E/'});
+        url = __jymfony.strtr(url, {'/../': '/%2E%2E/', '/./': '/%2E/'});
         if ('/..' === url.substr(-3)) {
             url = url.substr(0, -2) + '%2E%2E';
         } else if ('/.' === url.substr(-2)) {
