@@ -22,8 +22,12 @@ class RouteExtractor implements RouteExtractorInterface
         $routes = [];
 
         foreach ($this->routes as $name => $route) {
-            $sections = (array) $route->getOption('js_routing');
-            if (null !== $section && ! in_array($section, $sections)) {
+            $sections = $route->getOption('js_routing');
+            if (null === $sections) {
+                continue;
+            }
+
+            if (null !== $section && ! in_array($section, (array) $sections)) {
                 continue;
             }
 
