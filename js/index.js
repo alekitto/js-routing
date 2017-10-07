@@ -1,1 +1,2 @@
-global.UrlGenerator = require('./UrlGenerator');
+import UrlGenerator from './UrlGenerator';
+window.UrlGenerator = UrlGenerator;

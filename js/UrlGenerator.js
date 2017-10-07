@@ -347,4 +347,4 @@ UrlGenerator.RELATIVE_PATH = 2;
  */
 UrlGenerator.NETWORK_PATH = 3;
 
-module.exports = UrlGenerator;
+export default UrlGenerator;
