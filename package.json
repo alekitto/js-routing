@@ -2,7 +2,9 @@
   "author": "Alessandro Chitolina <alekitto@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@jymfony/util": "0.1.0-alpha.8",
+    "@jymfony/util": "0.1.0-alpha.8"
+  },
+  "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.0",
