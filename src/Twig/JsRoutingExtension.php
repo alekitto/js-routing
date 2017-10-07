@@ -20,6 +20,8 @@ class JsRoutingExtension extends AbstractExtension
 
     public function getFunctions()
     {
-        yield new TwigFunction('js_routing_routes', [$this->extractor, 'extract'], ['is_safe' => ['html', 'js']]);
+        yield new TwigFunction('js_routing_routes', function (string $section = null) {
+            return json_encode($this->extractor->extract($section));
+        }, ['is_safe' => ['html', 'js']]);
     }
 }
