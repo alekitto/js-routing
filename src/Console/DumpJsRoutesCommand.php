@@ -40,7 +40,7 @@ class DumpJsRoutesCommand extends Command
             ->addOption('section', null, InputOption::VALUE_REQUIRED | InputOption::VALUE_IS_ARRAY, 'Dump only the given sections')
             ->addOption('module', null, InputOption::VALUE_NONE, 'Export the generator as an ES6 module')
             ->addOption('global', null, InputOption::VALUE_REQUIRED, 'Register the generator as a property of the global object with the given name')
-            ->addOption('out', 'o', InputOption::VALUE_NONE, 'Define the output file', '-')
+            ->addOption('out', 'o', InputOption::VALUE_REQUIRED, 'Define the output file', '-')
         ;
     }
 
@@ -58,13 +58,17 @@ class DumpJsRoutesCommand extends Command
             }
         }
 
+        if (! $input->getOption('module') && null === $input->getOption('global')) {
+            $input->setOption('global', 'Routing');
+        }
+
         $this->io = new SymfonyStyle($input, $output);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sections = $input->getOption('section');
-        $this->io->text('Dumping routes for <success>' . $sections ? '"' . implode(', ', $sections) . '"' : 'all' . '</success> sections...');
+        $this->io->text('Dumping routes for <success>' . ($sections ? '"' . implode(', ', $sections) . '"' : 'all') . '</success> sections...');
 
         $routes = $this->extractor->extract($sections ?: null);
 
@@ -78,6 +82,8 @@ class DumpJsRoutesCommand extends Command
         if ($global = $input->getOption('global')) {
             $js .= "window.$global = routing;";
         }
+
+        $js .= "\n";
 
         fwrite($this->outFile, $js);
         fflush($this->outFile);
