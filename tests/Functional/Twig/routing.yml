@@ -1,0 +1,17 @@
+route_1:
+    path: /route_1
+    options:
+        js_routing: [ 'frontend', 'all' ]
+
+route_2:
+    path: /route_2
+
+route_3:
+    path: /route_3
+    options:
+        js_routing: 'all'
+
+route_4:
+    path: /route_4
+    options:
+        js_routing: [ 'backend' ]

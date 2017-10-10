@@ -1,0 +1,8 @@
+framework:
+    secret: t3stS3cr3t_
+    router: { resource: "%kernel.root_dir%/%kernel.test_case%/routing.yml" }
+
+services:
+    test.public_route_extractor:
+        alias: Kcs\JsRouting\Routing\RouteExtractorInterface
+        public: true
