@@ -29,7 +29,7 @@ class CachedRouteExtractor extends RouteExtractor
     public function extract(string $section = null): array
     {
         $configCacheFactory = new ConfigCacheFactory($this->debug);
-        $cache = $configCacheFactory->cache($this->cacheDir . '/' . $section . '.php',
+        $cache = $configCacheFactory->cache($this->cacheDir . '/' . ($section ?? '_all_routes') . '.php',
             function (ConfigCacheInterface $cache) use ($section) {
                 $cache->write(
                     '<?php return ' . var_export(parent::extract($section), true) . ';',

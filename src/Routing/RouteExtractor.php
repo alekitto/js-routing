@@ -2,6 +2,7 @@
 
 namespace Kcs\JsRouting\Routing;
 
+use Kcs\JsRouting\Routing\Dumped\DumpedRoute;
 use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -36,13 +37,13 @@ class RouteExtractor implements RouteExtractorInterface
             $defaults = $route->getDefaults();
             unset($defaults['_controller']);
 
-            $routes[$name] = [
-                'variables' => $compiledRoute->getVariables(),
-                'defaults' => $defaults,
-                'tokens' => $compiledRoute->getTokens(),
-                'schemes' => $route->getSchemes(),
-                'hostTokens' => $compiledRoute->getHostTokens(),
-            ];
+            $routes[$name] = new DumpedRoute(
+                $compiledRoute->getVariables(),
+                $defaults,
+                $compiledRoute->getTokens(),
+                $route->getSchemes(),
+                $compiledRoute->getHostTokens()
+            );
         }
 
         return $routes;

@@ -99,17 +99,13 @@ class UrlGenerator {
      * @param {string} name
      * @param {int} referenceType
      * @param {[[string]]} hostTokens
-     * @param {string[]} requiredSchemes
+     * @param {[string]} requiredSchemes
      *
      * @returns {string}
      *
      * @private
      */
     _doGenerate(variables, defaults, tokens, parameters, name, referenceType, hostTokens, requiredSchemes = []) {
-        if (isArray(defaults) && defaults.length === 0) {
-            defaults = {};
-        }
-
         const mergedParams = Object.assign({}, defaults, parameters);
 
         const diff = variables.filter(name => !mergedParams.hasOwnProperty(name));
