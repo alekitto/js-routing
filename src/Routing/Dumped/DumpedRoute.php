@@ -31,6 +31,22 @@ final class DumpedRoute implements \JsonSerializable
 
     public function __construct(array $variables, array $defaults, array $tokens, array $schemes, array $hostTokens)
     {
+        foreach ($tokens as &$token) {
+            if (! isset($token[2])) {
+                continue;
+            }
+
+            $token[2] = str_replace('++', '+', $token[2]);
+        }
+
+        foreach ($hostTokens as &$hostToken) {
+            if (! isset($hostToken[2])) {
+                continue;
+            }
+
+            $hostToken[2] = str_replace('++', '+', $hostToken[2]);
+        }
+
         $this->variables = $variables;
         $this->defaults = $defaults;
         $this->tokens = $tokens;
