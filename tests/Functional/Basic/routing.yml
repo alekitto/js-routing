@@ -7,7 +7,7 @@ route_2:
     path: /route_2
 
 route_3:
-    path: /route_3
+    path: /route_3/{id}
     options:
         js_routing: 'all'
 

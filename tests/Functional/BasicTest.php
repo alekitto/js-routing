@@ -23,13 +23,13 @@ class BasicTest extends WebTestCase
 
         $this->assertEquals([
             'route_1' => new DumpedRoute([], [], [['text', '/route_1']], [], []),
-            'route_3' => new DumpedRoute([], [], [['text', '/route_3']], [], []),
+            'route_3' => new DumpedRoute(['id'], [], [['variable', '/', '[^/]+', 'id'],['text', '/route_3']], [], []),
             'route_4' => new DumpedRoute([], [], [['text', '/route_4']], [], []),
         ], $extractor->extract());
 
         $this->assertEquals([
             'route_1' => new DumpedRoute([], [], [['text', '/route_1']], [], []),
-            'route_3' => new DumpedRoute([], [], [['text', '/route_3']], [], []),
+            'route_3' => new DumpedRoute(['id'], [], [['variable', '/', '[^/]+', 'id'],['text', '/route_3']], [], []),
         ], $extractor->extract('all'));
 
         $this->assertEquals([
