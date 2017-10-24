@@ -119,7 +119,7 @@ class UrlGenerator {
 
         for (const token of tokens) {
             if ('variable' === token[0]) {
-                if (!optional || !defaults.hasOwnProperty(token[3]) || void 0 !== mergedParams[token[3]] && mergedParams[token[3]].toString() !== defaults[token[3]].toString()) {
+                if (!optional || !defaults.hasOwnProperty(token[3]) || void 0 !== mergedParams[token[3]] && String(mergedParams[token[3]]) !== String(defaults[token[3]])) {
                     const regex = new RegExp('^' + token[2] + '$', !!token[4] ? 'u' : '');
                     if (! regex.test(mergedParams[token[3]])) {
                         throw new InvalidParameterException(
