@@ -6,10 +6,11 @@
     <services>
         <defaults public="false" />
 
-        <service id="kcs.js_routing.routing.route_extractor" class="Kcs\JsRouting\Routing\RouteExtractor">
+        <service id="kcs.js_routing.routing.cached_route_extractor" class="Kcs\JsRouting\Routing\Cache\WarmableCachedRouteExtractor"
+            decorates="kcs.js_routing.routing.route_extractor">
             <argument type="service" id="router" />
+            <argument>%kernel.cache_dir%/js-routing</argument>
+            <argument>%kernel.debug%</argument>
         </service>
-
-        <service id="Kcs\JsRouting\Routing\RouteExtractorInterface" alias="kcs.js_routing.routing.route_extractor" />
     </services>
 </container>

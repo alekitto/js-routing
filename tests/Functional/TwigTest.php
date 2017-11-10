@@ -2,12 +2,11 @@
 
 namespace Kcs\JsRouting\Tests\Functional;
 
-use Kcs\JsRouting\Routing\Dumped\DumpedRoute;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TwigTest extends WebTestCase
 {
-    protected static function createKernel(array $options = array())
+    protected static function createKernel(array $options = [])
     {
         return new Kernel('Twig');
     }
@@ -25,7 +24,7 @@ class TwigTest extends WebTestCase
 
         $routes = '{"route_1":{"variables":[],"defaults":{},"tokens":[["text","\/route_1"]],"schemes":[],"hostTokens":[]},"route_3":{"variables":[],"defaults":{},"tokens":[["text","\/route_3"]],"schemes":[],"hostTokens":[]}}';
         $this->assertEquals($routes, trim($twig->render('routes.js.twig', [
-            'section' => 'all'
+            'section' => 'all',
         ])));
     }
 }

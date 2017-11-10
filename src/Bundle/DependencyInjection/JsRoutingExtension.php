@@ -3,11 +3,13 @@
 namespace Kcs\JsRouting\Bundle\DependencyInjection;
 
 use Symfony\Bundle\TwigBundle\TwigBundle;
+use Symfony\Component\Config\ConfigCacheInterface;
 use Symfony\Component\Config\FileLocator;
 use Symfony\Component\Console\Application;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Extension\Extension;
 use Symfony\Component\DependencyInjection\Loader\XmlFileLoader;
+use Symfony\Component\HttpKernel\CacheWarmer\CacheWarmerInterface;
 
 class JsRoutingExtension extends Extension
 {
@@ -22,6 +24,10 @@ class JsRoutingExtension extends Extension
 
         if (class_exists(TwigBundle::class)) {
             $loader->load('twig.xml');
+        }
+
+        if (interface_exists(CacheWarmerInterface::class) && interface_exists(ConfigCacheInterface::class)) {
+            $loader->load('cache.xml');
         }
     }
 }

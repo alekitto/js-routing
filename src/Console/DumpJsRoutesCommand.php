@@ -4,7 +4,6 @@ namespace Kcs\JsRouting\Console;
 
 use Kcs\JsRouting\Routing\RouteExtractorInterface;
 use Symfony\Component\Console\Command\Command;
-use Symfony\Component\Console\Exception\InvalidArgumentException;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\NullOutput;
@@ -68,12 +67,12 @@ class DumpJsRoutesCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output)
     {
         $sections = $input->getOption('section');
-        $this->io->text('Dumping routes for <info>' . ($sections ? '"' . implode(', ', $sections) . '"' : 'all') . '</info> sections...');
+        $this->io->text('Dumping routes for <info>'.($sections ? '"'.implode(', ', $sections).'"' : 'all').'</info> sections...');
 
         $routes = $this->extractor->extract($sections ?: null);
 
         $isModule = $input->getOption('module');
-        $js = ($isModule ? 'const' : 'var') . ' routing = new UrlGenerator('.json_encode($routes).");\n";
+        $js = ($isModule ? 'const' : 'var').' routing = new UrlGenerator('.json_encode($routes).");\n";
 
         if ($isModule) {
             $js .= "\nexport default routing;\n";

@@ -22,7 +22,7 @@ class Kernel extends BaseKernel
 
     public function registerBundles()
     {
-        return require __DIR__ . '/' . $this->testCase . '/bundles.php';
+        return require __DIR__.'/'.$this->testCase.'/bundles.php';
     }
 
     public function getRootDir()
@@ -32,12 +32,12 @@ class Kernel extends BaseKernel
 
     public function getCacheDir()
     {
-        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/cache/'.$this->environment;
+        return sys_get_temp_dir().'/'.self::VERSION.'/'.$this->testCase.'/cache/'.$this->environment;
     }
 
     public function getLogDir()
     {
-        return sys_get_temp_dir().'/'.Kernel::VERSION.'/'.$this->testCase.'/logs';
+        return sys_get_temp_dir().'/'.self::VERSION.'/'.$this->testCase.'/logs';
     }
 
     protected function getContainerClass()
@@ -65,7 +65,7 @@ class Kernel extends BaseKernel
 
     public function registerContainerConfiguration(LoaderInterface $loader)
     {
-        $loader->load(__DIR__ . '/' . $this->testCase . '/config.yml');
+        $loader->load(__DIR__.'/'.$this->testCase.'/config.yml');
     }
 
     protected function getKernelParameters()

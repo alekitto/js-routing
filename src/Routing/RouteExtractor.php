@@ -3,26 +3,31 @@
 namespace Kcs\JsRouting\Routing;
 
 use Kcs\JsRouting\Routing\Dumped\DumpedRoute;
-use Symfony\Component\Routing\RouteCollection;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * Extract exposed routes from symfony routing collection.
+ */
 class RouteExtractor implements RouteExtractorInterface
 {
     /**
-     * @var RouteCollection
+     * @var RouterInterface
      */
-    protected $routes;
+    private $router;
 
     public function __construct(RouterInterface $router)
     {
-        $this->routes = $router->getRouteCollection();
+        $this->router = $router;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function extract(string $section = null): array
     {
         $routes = [];
 
-        foreach ($this->routes as $name => $route) {
+        foreach ($this->router->getRouteCollection() as $name => $route) {
             $sections = $route->getOption('js_routing');
             if (null === $sections) {
                 continue;

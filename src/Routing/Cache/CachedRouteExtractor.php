@@ -1,11 +1,15 @@
 <?php declare(strict_types=1);
 
-namespace Kcs\JsRouting\Routing;
+namespace Kcs\JsRouting\Routing\Cache;
 
+use Kcs\JsRouting\Routing\RouteExtractor;
 use Symfony\Component\Config\ConfigCacheFactory;
 use Symfony\Component\Config\ConfigCacheInterface;
 use Symfony\Component\Routing\RouterInterface;
 
+/**
+ * Caching route extractor.
+ */
 class CachedRouteExtractor extends RouteExtractor
 {
     /**
@@ -26,13 +30,16 @@ class CachedRouteExtractor extends RouteExtractor
         parent::__construct($router);
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function extract(string $section = null): array
     {
         $configCacheFactory = new ConfigCacheFactory($this->debug);
-        $cache = $configCacheFactory->cache($this->cacheDir . '/' . ($section ?? '_all_routes') . '.php',
+        $cache = $configCacheFactory->cache($this->cacheDir.'/'.($section ?? '_all_routes').'.php',
             function (ConfigCacheInterface $cache) use ($section) {
                 $cache->write(
-                    '<?php return ' . var_export(parent::extract($section), true) . ';',
+                    '<?php return '.var_export(parent::extract($section), true).';',
                     $this->routes->getResources()
                 );
             });
