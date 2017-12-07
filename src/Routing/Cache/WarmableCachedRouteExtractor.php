@@ -41,7 +41,7 @@ final class WarmableCachedRouteExtractor extends CachedRouteExtractor implements
                 function (ConfigCacheInterface $cache) use ($section) {
                     $cache->write(
                         '<?php return '.var_export(parent::extract($section), true).';',
-                        $this->routes->getResources()
+                        $this->router->getRouteCollection()->getResources()
                     );
                 });
         }

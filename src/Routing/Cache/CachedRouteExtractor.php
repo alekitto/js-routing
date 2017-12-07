@@ -22,10 +22,16 @@ class CachedRouteExtractor extends RouteExtractor
      */
     private $debug;
 
+    /**
+     * @var RouterInterface
+     */
+    private $router;
+
     public function __construct(RouterInterface $router, string $cacheDir, bool $debug)
     {
         $this->cacheDir = $cacheDir;
         $this->debug = $debug;
+        $this->router = $router;
 
         parent::__construct($router);
     }
@@ -40,7 +46,7 @@ class CachedRouteExtractor extends RouteExtractor
             function (ConfigCacheInterface $cache) use ($section) {
                 $cache->write(
                     '<?php return '.var_export(parent::extract($section), true).';',
-                    $this->routes->getResources()
+                    $this->router->getRouteCollection()->getResources()
                 );
             });
 
