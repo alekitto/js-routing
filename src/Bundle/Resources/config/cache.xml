@@ -4,10 +4,10 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="false" />
-
-        <service id="kcs.js_routing.routing.cached_route_extractor" class="Kcs\JsRouting\Routing\Cache\WarmableCachedRouteExtractor"
-            decorates="kcs.js_routing.routing.route_extractor">
+        <service id="kcs.js_routing.routing.cached_route_extractor"
+                 class="Kcs\JsRouting\Routing\Cache\WarmableCachedRouteExtractor"
+                 decorates="kcs.js_routing.routing.route_extractor"
+                 public="false">
             <argument type="service" id="router" />
             <argument>%kernel.cache_dir%/js-routing</argument>
             <argument>%kernel.debug%</argument>

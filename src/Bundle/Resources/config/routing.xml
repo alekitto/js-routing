@@ -4,12 +4,10 @@
            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
     <services>
-        <defaults public="false" />
-
-        <service id="kcs.js_routing.routing.route_extractor" class="Kcs\JsRouting\Routing\RouteExtractor">
+        <service id="kcs.js_routing.routing.route_extractor" class="Kcs\JsRouting\Routing\RouteExtractor" public="false">
             <argument type="service" id="router" />
         </service>
 
-        <service id="Kcs\JsRouting\Routing\RouteExtractorInterface" alias="kcs.js_routing.routing.route_extractor" />
+        <service id="Kcs\JsRouting\Routing\RouteExtractorInterface" alias="kcs.js_routing.routing.route_extractor" public="false" />
     </services>
 </container>
