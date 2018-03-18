@@ -1,7 +1,10 @@
 require('@jymfony/util/lib/Platform');
 require('@jymfony/util/lib/is');
 require('@jymfony/util/lib/Object/entries');
+require('@jymfony/util/lib/Regex/quote');
 require('@jymfony/util/lib/String/strtr');
+require('@jymfony/util/lib/mixins');
+require('@jymfony/datastructure/src/HashTable');
 
 const InvalidParameterException = require('./Exception/InvalidParameterException');
 const MissingMandatoryParametersException = require('./Exception/MissingMandatoryParametersException');
@@ -250,9 +253,35 @@ class UrlGenerator {
         }
 
         if (extras.length) {
-            const query = Object.keys(parameters)
-                .filter(k => extras.indexOf(k) !== -1)
-                .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(parameters[k]))
+            const toHashTable = (obj) => {
+                if (! isObjectLiteral(obj) && ! isArray(obj)) {
+                    return obj;
+                }
+
+                const table = new HashTable();
+                for (const [k, v] of __jymfony.getEntries(obj)) {
+                    table.put(k, toHashTable(v));
+                }
+
+                return table;
+            };
+
+            const toQuery = (key, value, base = '') => {
+                if (value instanceof HashTable) {
+                    return Array.from(value)
+                        .map(el => toQuery(el[0], el[1], base ? base + '[' + key + ']' : key))
+                        .join('&');
+                }
+
+                return encodeURIComponent(base ? base + '[' + key + ']' : key) + '=' + encodeURIComponent(value);
+            };
+
+            const ht = toHashTable(Object.keys( parameters )
+                .filter( key => extras.indexOf(key) !== -1 )
+                .reduce( (res, key) => (res[key] = parameters[key], res), {} ));
+
+            const query = Array.from(ht)
+                .map(el => toQuery(el[0], el[1]))
                 .join('&');
 
             url += '?' + __jymfony.strtr(query, {'%2F': '/'});

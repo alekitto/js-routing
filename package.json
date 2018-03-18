@@ -2,15 +2,17 @@
   "author": "Alessandro Chitolina <alekitto@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@jymfony/util": "0.1.0-alpha.8",
+    "@jymfony/util": "0.1.0-alpha.9",
+    "@jymfony/datastructure": "0.1.0-alpha.9",
     "regenerator-runtime": "^0.11.0"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.0",
-    "uglifyjs-webpack-plugin": "^0.4.6",
-    "webpack": "^3.6.0"
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "uglifyjs-webpack-plugin": "^1.2.4",
+    "webpack": "^4.1.1",
+    "webpack-cli": "^2.0.12"
   },
   "scripts": {
     "build": "npm run build-dev && npm run build-prod",
