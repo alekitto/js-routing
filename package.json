@@ -2,8 +2,8 @@
   "author": "Alessandro Chitolina <alekitto@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@jymfony/util": "0.1.0-alpha.9",
-    "@jymfony/datastructure": "0.1.0-alpha.9",
+    "@jymfony/util": "github:jymfony/util",
+    "@jymfony/datastructure": "github:jymfony/data-structure",
     "regenerator-runtime": "^0.11.0"
   },
   "devDependencies": {
