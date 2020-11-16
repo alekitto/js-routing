@@ -2,22 +2,23 @@
   "author": "Alessandro Chitolina <alekitto@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "@jymfony/util": "github:jymfony/util",
-    "@jymfony/datastructure": "github:jymfony/data-structure",
-    "regenerator-runtime": "^0.11.0"
+    "@jymfony/util": "^0.1.0-alpha.28",
+    "@jymfony/datastructure": "^0.1.0-alpha.28",
+    "regenerator-runtime": "^0.13.7"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-loader": "^7.1.4",
-    "babel-preset-env": "^1.6.1",
-    "uglifyjs-webpack-plugin": "^1.2.4",
-    "webpack": "^4.1.1",
-    "webpack-cli": "^2.0.12"
+    "@babel/core": "^7.12.3",
+    "@babel/preset-env": "^7.12.1",
+    "babel-loader": "^8.2.1",
+    "core-js": "^3.7.0",
+    "webpack": "^5.4.0",
+    "webpack-cli": "^4.2.0"
   },
   "scripts": {
     "build": "npm run build-dev && npm run build-prod",
-    "build-dev": "NODE_ENV=dev webpack --config webpack.config.js",
-    "build-prod": "NODE_ENV=production webpack --config webpack.config.js"
+    "webpack": "webpack --config webpack.config.js",
+    "build-dev": "NODE_ENV=dev npm run webpack && NODE_ENV=dev NO_POLYFILL=1 npm run webpack",
+    "build-prod": "NODE_ENV=production npm run webpack && NODE_ENV=production NO_POLYFILL=1 npm run webpack"
   },
   "private": true
 }

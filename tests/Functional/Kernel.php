@@ -25,53 +25,26 @@ class Kernel extends BaseKernel
         return require __DIR__.'/'.$this->testCase.'/bundles.php';
     }
 
-    public function getRootDir()
-    {
-        return __DIR__;
-    }
-
-    public function getCacheDir()
+    public function getCacheDir(): string
     {
         return sys_get_temp_dir().'/'.self::VERSION.'/'.$this->testCase.'/cache/'.$this->environment;
     }
 
-    public function getLogDir()
+    public function getLogDir(): string
     {
         return sys_get_temp_dir().'/'.self::VERSION.'/'.$this->testCase.'/logs';
     }
 
-    protected function getContainerClass()
-    {
-        return $this->name.ucfirst($this->environment).($this->debug ? 'Debug' : '').$this->testCase.'ProjectContainer';
-    }
-
-    protected function initializeContainer()
-    {
-        $class = $this->getContainerClass();
-        $cache = new ConfigCache($this->getCacheDir().'/'.$class.'.php', $this->debug);
-        $container = $this->buildContainer();
-        $container->compile();
-        $this->dumpContainer($cache, $container, $class, $this->getContainerBaseClass());
-
-        require_once $cache->getPath();
-
-        $this->container = new $class();
-        $this->container->set('kernel', $this);
-
-        if ($this->container->has('cache_warmer')) {
-            $this->container->get('cache_warmer')->warmUp($this->container->getParameter('kernel.cache_dir'));
-        }
-    }
-
-    public function registerContainerConfiguration(LoaderInterface $loader)
+    public function registerContainerConfiguration(LoaderInterface $loader): void
     {
         $loader->load(__DIR__.'/'.$this->testCase.'/config.yml');
     }
 
-    protected function getKernelParameters()
+    protected function getKernelParameters(): array
     {
         $parameters = parent::getKernelParameters();
         $parameters['kernel.test_case'] = $this->testCase;
+        $parameters['kernel.root_dir'] = __DIR__;
 
         return $parameters;
     }

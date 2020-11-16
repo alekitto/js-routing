@@ -12,7 +12,7 @@ class BasicTest extends WebTestCase
         return new Kernel('Basic');
     }
 
-    public function testRouteExtractor()
+    public function testRouteExtractor(): void
     {
         $kernel = $this->createKernel();
         $kernel->boot();
@@ -21,22 +21,22 @@ class BasicTest extends WebTestCase
 
         $extractor = $container->get('test.public_route_extractor');
 
-        $this->assertEquals([
+        self::assertEquals([
             'route_1' => new DumpedRoute([], [], [['text', '/route_1']], [], []),
             'route_3' => new DumpedRoute(['id'], [], [['variable', '/', '[^/]+', 'id'], ['text', '/route_3']], [], []),
             'route_4' => new DumpedRoute([], [], [['text', '/route_4']], [], []),
         ], $extractor->extract());
 
-        $this->assertEquals([
+        self::assertEquals([
             'route_1' => new DumpedRoute([], [], [['text', '/route_1']], [], []),
             'route_3' => new DumpedRoute(['id'], [], [['variable', '/', '[^/]+', 'id'], ['text', '/route_3']], [], []),
         ], $extractor->extract('all'));
 
-        $this->assertEquals([
+        self::assertEquals([
             'route_1' => new DumpedRoute([], [], [['text', '/route_1']], [], []),
         ], $extractor->extract('frontend'));
 
-        $this->assertEquals([
+        self::assertEquals([
             'route_4' => new DumpedRoute([], [], [['text', '/route_4']], [], []),
         ], $extractor->extract('backend'));
     }
